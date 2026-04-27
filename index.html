@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ml">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Flow</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: white;
+      overflow: hidden;
+    }
+    .page {
+      display: none;
+      width: 100vw;
+      height: 100vh;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .active { display: flex; }
+    
+    button {
+      padding: 18px 36px;
+      font-size: 20px;
+      color: white;
+      background: #333;
+      border: 2px solid #555;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover { background: #444; }
+    
+    img, video {
+      max-width: 85%;
+      max-height: 70vh;
+    }
+    #endText {
+      display: none;
+      font-size: 26px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1: Button mathram -->
+  <div id="page1" class="page active">
+    <button onclick="showPage(2)">Open cheyy</button>
+  </div>
+
+  <!-- Page 2: Photo + Button -->
+  <div id="page2" class="page">
+    <img src="photo.jpg" alt="Photo">
+    <button onclick="showPage(3)">Next</button>
+  </div>
+
+  <!-- Page 3: Video -->
+  <div id="page3" class="page">
+    <video id="pageVideo" playsinline>
+      <source src="video.mp4" type="video/mp4">
+    </video>
+    <div id="endText">Apo sheri okke Bye</div>
+  </div>
+
+  <script>
+    function showPage(num) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById('page' + num).classList.add('active');
+      
+      if(num === 3) {
+        const video = document.getElementById('pageVideo');
+        const endText = document.getElementById('endText');
+        video.muted = true; 
+        video.play();
+        
+        video.onended = function() {
+          endText.style.display = 'block';
+        };
+      }
+    }
+  </script>
+</body>
+  </html>
